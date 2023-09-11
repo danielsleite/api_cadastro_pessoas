@@ -1,36 +1,41 @@
+
 # API para cadastro de funcionários
 
-Esse projeto apresenta o MVP de requisido para conclusão da sprint 1 da curso de  **Engenharia de Softaware**  oferecido pela **PUC-Rio**
+Esse projeto apresenta o MVP de requisido para conclusão da sprint 3 da curso de  **Engenharia de Softaware**  oferecido pela **PUC-Rio**
 
 Para tal, foi criado uma API em python, utilizando como base as bibliotecas flask e sqlalchemy. 
 
-Essa API tem como objetivo prover ferramentas para criação de um sistema de cadastro de funcionário. 
+Essa API tem como objetivo prover ferramentas para criação de um sistema de cadastro de dados pessoais, como nome, cpf e endereço. 
+
+Para auxílio do prencimento do endereço, essa API faz a busca por CEP por uma API externa (https://apicep.com/api-de-consulta/)
+
+**Essa API externa, apiCEP, é livre para uso comercial, para executar em qualquer end-point, sem restrição de CORS.**
 
 Para interação da API com o banco e front-end, foram criadas diversas rodas, entre elas:
 
 
->**/funcionario** - para incluir un novo funcionário
+>**/pessoa** - para incluir uma nova pessoa à base
 
->**/funcionarios** - para obter uma lsita com os dados de cada funcionário
+>**/pessoa** - para ler os dados de uma dada pessoa, baseado em seu CPF
 
->**/login** - para realizar o login na interface
+>**/pessoas** - para obter uma lista com os dados de cada pessoa
 
->**/excluir** - para apagar um funcionário
+>**/pessoa_cep** - para consumir a api externa [`apiCEP`](https://apicep.com/api-de-consulta/), obtendo as informações do endereço, a partir do cep
 
->**/atualiza** - para alterar algum campo de dados ou forçar o usuário a realizar o reset da senha no próximo login
+>**/pessoa_excluir** - para apagar uma bpessoa, baseado no CPF
+
+>**/pessoa_atualiza** - para alterar os campos de dados de uma dada pessoa, exceto o CPF
+
+>**/pessoa_atualiza_cpf** - para alterar o CPF de uma dada pessoa
 
 ---
 ## Banco
 
 Para realizar a rentenção dos dados, a API cria um banco .sqlite3, caso o mesmo não exista.
 
-Além do banco, são criadas duas tabelas: 
+Banco, possui a tabela `pessoa`, com os seguintes campos:
 
-* `pessoa`, que armazena dasdo mais genéricos (nome, cpf, endereço)
-
-* `funcionario`, que armazenda dados referentes à empresa (matricula, login, senha, email, funcao,...). 
-
-A relação da tabela `funcionario` com a tabela `pessoa` ocorre por meio do campo `cpf` de pessoa, pois o mesmo aparece em `funcionario` como uma chave estrangeira.
+* (nome, cpf, rua, bairro, cidade, estado)
 
 ---
 ## Como executar 

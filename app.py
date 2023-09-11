@@ -306,9 +306,7 @@ def exclui_pessoa(query: PessoaBuscaSchema):
 
     except IntegrityError as e:
         # como a duplicidade do nome é a provável razão do IntegrityError
-        error_msg = (
-            "Nao foi excluir a pessoa. Verifique se o campo cpf está correto.:/"
-        )
+        error_msg = "Nao foi excluir a pessoa. Verifique se o campo cpf está correto.:/"
         logger.warning(f"Erro ao excluir o pessoa: '{pessoa.login}', {error_msg}")
         return {"message": error_msg}, 409
 
@@ -334,6 +332,13 @@ def busca_por_cpf(cpf: str) -> Pessoa:
     responses={"200": InterfaceParaEndereco, "404": ErrorSchema},
 )
 def get_endreco(query: CepBuscaSchema):
+    """Realiza consulta de CEP por meio de API externa: https://apicep.com/api-de-consulta/
+
+    API externa livre para uso comercial, para executar em qualquer end-point, sem restrição de CORS.
+
+    Retorna o preenchimento dos dados de rua, bairro, cidade e estado, em caso de cep válido. Formato do CEP: "XXXXX-XXX"
+    """
+
     url = f"https://cdn.apicep.com/file/apicep/{query.cep}.json"
 
     logger.warning(url)
