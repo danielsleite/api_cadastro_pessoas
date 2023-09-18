@@ -339,7 +339,8 @@ def get_endreco(query: CepBuscaSchema):
     Retorna o preenchimento dos dados de rua, bairro, cidade e estado, em caso de cep válido. Formato do CEP: "XXXXX-XXX"
     """
 
-    url = f"https://cdn.apicep.com/file/apicep/{query.cep}.json"
+    cep = query.cep
+    url = f"https://cdn.apicep.com/file/apicep/{cep}.json"
 
     logger.warning(url)
     response = requests.get(url)
@@ -350,14 +351,15 @@ def get_endreco(query: CepBuscaSchema):
         logger.warning("Endereço encontrado para o CEP:")
 
         return {
-            "Rua": endereco["address"],
-            "Bairro": endereco["district"],
-            "Cidade": endereco["city"],
-            "Estado": endereco["state"],
+            "valido": True,
+            "rua": endereco["address"],
+            "bairro": endereco["district"],
+            "cidade": endereco["city"],
+            "estado": endereco["state"],
         }, 200
     else:
         error_msg = (
-            "Não foi encontrado endereço para o CEP informado. Verifique o campo CEP. "
+            "Não foi encontrado endereço para o CEP informado. Verifique o campo CEP. " + response.text
         )
-        logger.warning(f"CEP: '{query.cep}', {error_msg}")
+        logger.warning(f"CEP: '{cep}', {error_msg}")
         return {"message": error_msg}, 404

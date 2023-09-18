@@ -11,6 +11,27 @@ Para auxílio do prencimento do endereço, essa API faz a busca por CEP por uma 
 
 **Essa API externa, apiCEP, é livre para uso comercial, para executar em qualquer end-point, sem restrição de CORS.**
 
+Essa Api externa possui apenas uma rota get, cuja url padrão pode ser observada abaixo:
+
+* Padrão da URL	https://cdn.apicep.com/file/apicep/`[cep]`.json
+
+Como retorno, será exposto um json com as informações do endereço, conforme exemplo abaixo:
+* Exemplo:	https://cdn.apicep.com/file/apicep/06233-030.json
+
+
+        {
+            "code":"06233-030",
+            "state":"SP",
+            "city":"Osasco",
+            "district":"Piratininga",
+            "address":"Rua Paula Rodrigues",
+            "status":200,
+            "ok":true,
+            "statusText":"ok"
+        }
+
+Maiores informações sobre a api externa, podem ser encontrada no [`site`](https://apicep.com/api-de-consulta/) do fabricante
+
 Para interação da API com o banco e front-end, foram criadas diversas rodas, entre elas:
 
 

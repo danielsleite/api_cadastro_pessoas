@@ -21,7 +21,7 @@ class PessoaBuscaSchema(BaseModel):
     A busca é feita baseada no CPF da pesssoa
     """
 
-    cpf: str = "111111111-11"
+    cpf: str = "123456789-10"
 
 class ListagemPessoasSchema(BaseModel):
     """Lista dos dados das pessoas cadastradas no banco."""
@@ -39,6 +39,7 @@ class PessoaViewSchema(BaseModel):
     bairo: str = "Baixo algum"
     cidade: str = "Rio de Janeiro"
     estado: str = "RJ"
+    status: bool = True
 
 
 def apresenta_pessoas(pessoas: List[Pessoa]):
@@ -61,15 +62,17 @@ def apresenta_pessoa(pessoa: Pessoa):
         "bairro": pessoa.bairro,
         "cidade": pessoa.cidade,
         "estado": pessoa.estado,
+        "status": True
     }
 
 class InterfaceParaEndereco(BaseModel):
+    
     """Retorna os campos que representam o endereço."""
-
-    Rua: str = "Rua Alguma coisa"
-    Bairro: str = "Bairro CX"
-    Cidade: str = "Rio de Janeiro"
-    Estado: str = "RJ"
+    valido: bool = True
+    rua: str = "Rua Alguma coisa"
+    bairro: str = "Bairro CX"
+    cidade: str = "Rio de Janeiro"
+    estado: str = "RJ"
 
 
 class CepBuscaSchema(BaseModel):
