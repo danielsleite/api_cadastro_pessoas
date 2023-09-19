@@ -14,7 +14,11 @@ from flask_cors import CORS
 
 info = Info(title="API Cadastro de pessoas. Autor: Daniel Leite", version="1.0.0")
 app = OpenAPI(__name__, info=info)
-CORS(app)
+# CORS(app)
+CORS(app, support_credentials=True)
+
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 # definindo tags
 home_tag = Tag(
