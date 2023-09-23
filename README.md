@@ -90,6 +90,11 @@ Certifique-se de ter o [Docker](https://docs.docker.com/engine/install/) instala
 Navegue até o diretório que contém o Dockerfile e o requirements.txt no terminal.
 Execute **como administrador** o seguinte comando para construir a imagem Docker:
 
+Caso não exita, crie uma interface de rede para servir de ponte entre os outros containers
+
+```
+$ docker network create --driver=bridge minha-rede
+
 ```
 $ docker build -t api-cadastro-pessoas .
 ```
@@ -97,7 +102,7 @@ $ docker build -t api-cadastro-pessoas .
 Uma vez criada a imagem, para executar o container basta executar, **como administrador**, seguinte o comando:
 
 ```
-$ docker run -p 5001:5001 api-cadastro-pessoas
+$ docker run -d --name=api_pessoas_ip --network=minha-rede -p 5001:5001 api-cadastro-pessoas
 ```
 
 Uma vez executando, para acessar a API, basta abrir o [http://localhost:5000/#/](http://localhost:5000/#/) no navegador.
