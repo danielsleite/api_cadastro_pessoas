@@ -87,19 +87,21 @@ Para versão `Swagger` abra o link [http://localhost:5000/openapi/swagger#/](htt
 
 Certifique-se de ter o [Docker](https://docs.docker.com/engine/install/) instalado e em execução em sua máquina.
 
-Navegue até o diretório que contém o Dockerfile e o requirements.txt no terminal.
-Execute **como administrador** o seguinte comando para construir a imagem Docker:
-
 Caso não exita, crie uma interface de rede para servir de ponte entre os outros containers
 
 ```
 $ docker network create --driver=bridge minha-rede
+```
+Navegue até o diretório que contém o Dockerfile e o requirements.txt no terminal.
+Execute **como administrador** o seguinte comando para construir a imagem Docker:
 
 ```
 $ docker build -t api-cadastro-pessoas .
 ```
 
+
 Uma vez criada a imagem, para executar o container basta executar, **como administrador**, seguinte o comando:
+
 
 ```
 $ docker run -d --name=api_pessoas_ip --network=minha-rede -p 5001:5001 api-cadastro-pessoas
